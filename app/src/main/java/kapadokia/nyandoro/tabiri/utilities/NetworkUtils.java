@@ -1,0 +1,52 @@
+package kapadokia.nyandoro.tabiri.utilities;
+
+import java.net.URL;
+
+public final class NetworkUtils {
+
+    public static final String TAG = NetworkUtils.class.getSimpleName();
+
+    private static final String DYNAMIC_WEATHER_URL =
+            "https://andfun-weather.udacity.com/weather";
+
+    private static final String STATIC_WEATHER_URL =
+            "https://andfun-weather.udacity.com/staticweather";
+
+    private static final String FOREECAST_BASE_URL = STATIC_WEATHER_URL;
+
+    /*
+     * NOTE: These values only effect responses from OpenWeatherMap, NOT from the fake weather
+     * server. They are simply here to allow us to teach you how to build a URL if you were to use
+     * a real API.If you want to connect your app to OpenWeatherMap's API, feel free to! However,
+     * we are not going to show you how to do so in this course.
+     */
+
+    //format our api to return
+    public static final String fomart = "json";
+    //the units we want our api to return
+    public static final String units  = "metric";
+    /* The number of days we want our API to return */
+    private static final int numDays = 14;
+
+    final static String QUERY_PARAM = "q";
+    final static String LAT_PARAM = "lat";
+    final static String LON_PARAM = "lon";
+    final static String FORMAT_PARAM = "mode";
+    final static String UNITS_PARAM = "units";
+    final static String DAYS_PARAM = "cnt";
+
+
+    /**
+     * Builds the URL used to talk to the weather server using a location. This location is based
+     * on the query capabilities of the weather provider that we are using.
+     *
+     * @param locationQuery The location that will be queried for.
+     * @return The URL to use to query the weather server.
+     */
+
+
+    public static URL buildUrl(String locationQuery){
+
+        return null;
+    }
+}
