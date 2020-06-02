@@ -2,6 +2,8 @@ package kapadokia.nyandoro.tabiri;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,17 +22,30 @@ import kapadokia.nyandoro.tabiri.utilities.OpenWeatherJsonUtils;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView weatherText, error_message;
+    private TextView  error_message;
     private ProgressBar progressBar;
+    private RecyclerView recyclerView;
+    private ForecastAdapter forecastAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        weatherText = findViewById(R.id.tv_weather_data);
+
         error_message = findViewById(R.id.error_teext);
         progressBar = findViewById(R.id.refresh_progress_bar);
+        recyclerView = findViewById(R.id.recycler_view_forecast);
+        forecastAdapter = new ForecastAdapter();
 
+        //layout manager
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(forecastAdapter);
+
+        //setHasFixedSize(true) on mRecyclerView to designate that all items in the list will have the same size
+        recyclerView.setHasFixedSize(true);
         /* Once all of our views are setup, we can load the weather data. */
         loadWeatherData();
 
@@ -50,13 +65,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        switch (id){
-            case R.id.action_refresh:
-                weatherText.setText("");
-                loadWeatherData();
+
+        if (id == R.id.action_refresh) {
+            // COMPLETED (46) Instead of setting the text to "", set the adapter to null before refreshing
+            forecastAdapter.setWeatherData(null);
+            loadWeatherData();
+            return true;
         }
 
-        return true;
+        return super.onOptionsItemSelected(item);
+
     }
 
     /**
@@ -73,15 +91,16 @@ public class MainActivity extends AppCompatActivity {
 //    method to hide error message and show weather data
     public void showWeatherDataView(){
         error_message.setVisibility(View.GONE);
-        weatherText.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
     }
 
 //    will hide the weather data and show the error message
 
     public void showErrorMessage(){
         error_message.setVisibility(View.VISIBLE);
-        weatherText.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
     }
+
     public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
         @Override
@@ -117,14 +136,14 @@ public class MainActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
 
             if (s !=null){
-                //showWeatherDataView();
+                showWeatherDataView();
                 /*
                  * Iterate through the array and append the Strings to the TextView. The reason why we add
                  * the "\n\n\n" after the String is to give visual separation between each String in the
                  * TextView. Later, we'll learn about a better way to display lists of data.
                  */
                 for (String weatherString : s) {
-                    weatherText.append((weatherString) + "\n\n\n");
+                    forecastAdapter.setWeatherData(s);
                 }
             }
 
