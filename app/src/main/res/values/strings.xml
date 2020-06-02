@@ -22,11 +22,12 @@
     <!--Used in Action Bar, and in AndroidManifest to tell the device the name of this app.-->
     <!--It's good to keep this short, so your launcher icon isn't displayed with "The greatest Wea"-->
     <!--or something similar.-->
-    <string name="app_name">Sunshine</string>
+    <string name="app_name">Tabiri</string>
+    <string name="refresh_button">Refresh</string>
 
 
     <!-- - - - - - - - - - - - - -->
-    <!--Used by SunshineDateUtils-->
+    <!--Used by TabiriDateUtils-->
     <!-- - - - - - - - - - - - - -->
 
     <!-- For labelling today's forecast [CHAR LIMIT=15] -->
@@ -125,6 +126,8 @@
 
     <string name="condition_unknown">Unknown (<xliff:g id="conditionId">%1$d</xliff:g>)</string>
 
+    <!-- custom error message  -->
+    <string name="error_message">Trouble loading this page</string>
 
     <!-- - - - - - - - - - - -->
     <!-- Used by NetworkUtils-->
@@ -137,7 +140,7 @@
     <!--NONE-->
 
     <!-- - - - - - - - - - - - - - -->
-    <!--Used by SunshinePreferences-->
+    <!--Used by TabiriPreferences-->
     <!-- - - - - - - - - - - - - - -->
     <!--NONE-->
 </resources>

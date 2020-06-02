@@ -18,15 +18,16 @@ package kapadokia.nyandoro.tabiri.utilities;
 import android.content.Context;
 import android.text.format.DateUtils;
 
-import com.example.android.sunshine.R;
 
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
+import kapadokia.nyandoro.tabiri.R;
+
 /**
  * Class for handling date conversions that are useful for Sunshine.
  */
-public final class SunshineDateUtils {
+public final class TabiriDateUtils {
 
     public static final long SECOND_IN_MILLIS = 1000;
     public static final long MINUTE_IN_MILLIS = SECOND_IN_MILLIS * 60;

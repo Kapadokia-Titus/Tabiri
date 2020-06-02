@@ -87,8 +87,8 @@ public final class OpenWeatherJsonUtils {
         parsedWeatherData = new String[weatherArray.length()];
 
         long localDate = System.currentTimeMillis();
-        long utcDate = SunshineDateUtils.getUTCDateFromLocal(localDate);
-        long startDay = SunshineDateUtils.normalizeDate(utcDate);
+        long utcDate = TabiriDateUtils.getUTCDateFromLocal(localDate);
+        long startDay = TabiriDateUtils.normalizeDate(utcDate);
 
         for (int i = 0; i < weatherArray.length(); i++) {
             String date;
@@ -107,8 +107,8 @@ public final class OpenWeatherJsonUtils {
              * We ignore all the datetime values embedded in the JSON and assume that
              * the values are returned in-order by day (which is not guaranteed to be correct).
              */
-            dateTimeMillis = startDay + SunshineDateUtils.DAY_IN_MILLIS * i;
-            date = SunshineDateUtils.getFriendlyDateString(context, dateTimeMillis, false);
+            dateTimeMillis = startDay + TabiriDateUtils.DAY_IN_MILLIS * i;
+            date = TabiriDateUtils.getFriendlyDateString(context, dateTimeMillis, false);
 
             /*
              * Description is in a child array called "weather", which is 1 element long.
