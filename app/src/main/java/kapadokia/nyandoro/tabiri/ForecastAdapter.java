@@ -14,6 +14,8 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Tabiri
     private String[] weatherData;
     Context context;
 
+   // final private  OnItemClickListener onItemClickListener;
+
     public class TabiriViewHolder extends RecyclerView.ViewHolder {
         public final  TextView weatherText;
         
@@ -21,6 +23,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Tabiri
             super(itemView);
             weatherText = itemView.findViewById(R.id.tv_weather_data);
         }
+
     }
 
 
