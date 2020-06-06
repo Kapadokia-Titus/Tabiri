@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -49,7 +50,13 @@ public class MainActivity extends AppCompatActivity {
         /* Once all of our views are setup, we can load the weather data. */
         loadWeatherData();
 
-
+        forecastAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void setOnclickListener(int tabiriItem) {
+               Intent intent  = new Intent(MainActivity.this, DetailsActivity.class);
+               startActivity(intent);
+            }
+        });
 
     }
 

@@ -14,17 +14,34 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Tabiri
     private String[] weatherData;
     Context context;
 
-   // final private  OnItemClickListener onItemClickListener;
+    /*
+     * An on-click handler that we've defined to make it easy for an Activity to interface with
+     * our RecyclerView
+     */
 
-    public class TabiriViewHolder extends RecyclerView.ViewHolder {
+    private OnItemClickListener listener;
+
+
+    public class TabiriViewHolder extends RecyclerView.ViewHolder{
         public final  TextView weatherText;
-        
-        public TabiriViewHolder(@NonNull View itemView) {
-            super(itemView);
-            weatherText = itemView.findViewById(R.id.tv_weather_data);
+
+        public TabiriViewHolder(@NonNull View view) {
+            super(view);
+            weatherText = view.findViewById(R.id.tv_weather_data);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    listener.setOnclickListener(position);
+                }
+            });
+
         }
 
+
     }
+
 
 
 
@@ -68,5 +85,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Tabiri
         this.weatherData = weatherData;
         notifyDataSetChanged();
     }
-
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
 }
