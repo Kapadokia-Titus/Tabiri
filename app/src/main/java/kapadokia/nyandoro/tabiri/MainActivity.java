@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import kapadokia.nyandoro.tabiri.data.TabiriPrefference;
 import kapadokia.nyandoro.tabiri.utilities.NetworkUtils;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView  error_message;
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
+    private List list;
     private ForecastAdapter forecastAdapter;
 
     @Override
@@ -39,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view_forecast);
         forecastAdapter = new ForecastAdapter();
 
+         list = new ArrayList<>();
+
+
+
         //layout manager
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(RecyclerView.VERTICAL);
@@ -50,10 +57,12 @@ public class MainActivity extends AppCompatActivity {
         /* Once all of our views are setup, we can load the weather data. */
         loadWeatherData();
 
-        forecastAdapter.setOnItemClickListener(new OnItemClickListener() {
+        forecastAdapter.setOnItemClickListener( new OnItemClickListener() {
             @Override
             public void setOnclickListener(int tabiriItem) {
                Intent intent  = new Intent(MainActivity.this, DetailsActivity.class);
+               String listItem = list.get(tabiriItem).toString();
+               intent.putExtra(Intent.EXTRA_TEXT, listItem);
                startActivity(intent);
             }
         });
@@ -151,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
                  */
                 for (String weatherString : s) {
                     forecastAdapter.setWeatherData(s);
+                    list.add(s);
                 }
             }
 
